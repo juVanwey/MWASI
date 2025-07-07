@@ -1,8 +1,0 @@
-model Donation {
-  id        Int      @id @default(autoincrement())
-  amount    Float
-  date      DateTime @default(now())
-  email     String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-}

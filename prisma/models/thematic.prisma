@@ -1,0 +1,5 @@
+model Thematic {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  events Event[] @relation("EventThematics")
+}

@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static("src/public"));
 // à la place :
 const path = require("path");
-app.use(express.static(path.join(__dirname, 'src/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 /* ------------------------ MOTEUR DE VUE TWIG ------------------------ */

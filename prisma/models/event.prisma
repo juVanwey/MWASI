@@ -1,0 +1,33 @@
+model Event {
+  // ---------------------------------
+  // Champs simples
+  // ---------------------------------
+  id          Int      @id @default(autoincrement())  // Identifiant unique auto-incrémenté
+  title       String                                // Titre de l'événement
+  description String                                // Description détaillée
+  date        DateTime                              // Date et heure de l'événement
+  location    String                                // Lieu de l'événement
+  createdAt   DateTime @default(now())              // Date de création automatique
+
+  // ---------------------------------
+  // Relations 1-à-n
+  // ---------------------------------
+  createdBy   User   @relation("CreatedEvents", fields: [createdById], references: [id])  // Créateur (admin/organisateur)
+  createdById Int     // Clé étrangère vers User
+
+  volunteerAssignments VolunteerAssignment[]        // Feuilles de route pour bénévoles
+  registrations        Registration[]               // Inscriptions à l'événement
+
+  // ---------------------------------
+  // Relations n-à-n
+  // ---------------------------------
+  volunteers User[]  @relation("VolunteerUsers")    // Utilisateurs bénévoles assignés à l'événement
+  employees  User[]  @relation("EmployeeUsers")     // Utilisateurs professionnels assignés
+
+  thematics      Thematic[]  @relation("EventThematics")  // Thématiques associées
+
+  // ---------------------------------
+  // Relation optionnelle 1-à-1
+  // ---------------------------------
+  mediaFeedback  MediaFeedback?                      // Retour média lié à l'événement (optionnel)
+}

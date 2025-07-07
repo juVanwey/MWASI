@@ -1,0 +1,9 @@
+model Testimonial {
+  id          Int      @id @default(autoincrement())
+  content     String
+  authorName  String
+  createdAt   DateTime @default(now())
+
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById Int
+}

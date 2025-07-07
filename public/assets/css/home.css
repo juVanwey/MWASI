@@ -1,0 +1,161 @@
+/* === HERO SECTION === */
+.hero {
+    background-color: #9a3e35;
+    color: white;
+    text-align: center;
+    padding: 4rem 1.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  /* === BOUTONS === */
+  .btn {
+    background-color: white;
+    color: #9a3e35;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .btn-don {
+    background-color: #176a2a;
+    color: white;
+  }
+  
+  .btn-don:hover {
+    background-color: #125522;
+  }
+  
+  .btn-small {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  /* === SECTIONS === */
+  .section {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .section-subtitle {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  /* === CARTES === */
+  .card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .card-image {
+    width: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0.25rem;
+    font-weight: 600;
+  }
+  
+  .card-date {
+    font-size: 0.9rem;
+    color: #9a3e35;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* === CARROUSEL === */
+  .carousel-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel-track {
+    display: flex;
+    gap: 1.25rem;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+  }
+  
+  .carousel-card {
+    min-width: 280px;
+    max-width: 320px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  
+  /* === TÉMOIGNAGES === */
+  .testimonial-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+  }
+  
+  .testimonial-quote {
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+  

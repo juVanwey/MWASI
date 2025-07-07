@@ -1,0 +1,26 @@
+model MediaFeedback {
+  id          Int       @id @default(autoincrement())
+  mediaGallery String    // pour stocker par exemple une URL ou un chemin vers la galerie média
+  caption     String?
+  eventId     Int @unique
+  event       Event     @relation(fields: [eventId], references: [id])
+}
+
+// model MediaFeedback {
+//   id           Int       @id @default(autoincrement())
+//   mediaGallery String    // URL ou chemin unique (peut être JSON si plusieurs médias)
+//   caption      String?
+//   mediaType    MediaType? // enum à définir si besoin
+//   createdAt    DateTime  @default(now())
+//   eventId      Int
+//   event        Event     @relation(fields: [eventId], references: [id])
+//   userId       Int?      // optionnel si tu veux garder trace de qui a posté
+//   user         User?     @relation(fields: [userId], references: [id])
+// }
+
+// enum MediaType {
+//   IMAGE
+//   VIDEO
+//   AUDIO
+//   OTHER
+// }
