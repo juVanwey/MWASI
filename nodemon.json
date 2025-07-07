@@ -1,6 +1,6 @@
 {
-    "watch": ["app.js"],
-    "ext": "js,json",
-    "ignore": ["node_modules"],
-    "exec": "node app.js"
-  }  
+  "watch": ["src/views", "src/public"],
+  "ext": "js,json,twig,css,html",
+  "ignore": ["node_modules"],
+  "exec": "node app.js"
+}

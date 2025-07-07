@@ -1,0 +1,155 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Accueil - MWASI
+{% endblock %}
+
+{% block main %}
+	<section class="hero">
+		<div class="hero-content">
+			<h1 class="hero-title">Promouvoir la santé globale et le bien-être auprès des femmes noires et racisées</h1>
+			<p class="hero-subtitle">Seules nous sommes invisibles, ensemble nous sommes invincibles</p>
+			<div class="hero-buttons">
+				<a href="/evenements" class="btn">📅 Voir les événements</a>
+				<a href="/rejoindre" class="btn">👥 Rejoindre la communauté</a>
+				<a href="/newsletter" class="btn">✉️ S’abonner à la newsletter</a>
+				<a href="/don" class="btn btn-don">💚 Faire un don</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2 class="section-title">Prochains événements</h2>
+		<p class="section-subtitle">Découvrez nos prochaines rencontres et ateliers</p>
+		<div class="carousel-container">
+			<div class="carousel-track">
+				{% for event in events %}
+					<article class="card carousel-card">
+						<img src="{{ event.image }}" alt="{{ event.title }}" class="card-image">
+						<h3 class="card-title">{{ event.title }}</h3>
+						<p class="card-date">{{ event.date }}</p>
+						<p class="card-description">{{ event.description }}</p>
+						<a href="{{ event.link }}" class="btn btn-small">Participer</a>
+					</article>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="carousel-container">
+							<div class="carousel-track">
+								<article class="card carousel-card">
+									<img src="/images/yoga-afro.jpg" alt="Atelier Yoga Afro" class="card-image">
+									<h3 class="card-title">Atelier Yoga Afro</h3>
+									<p class="card-date">15 juillet 2025</p>
+									<p class="card-description">Un moment de détente et de reconnexion dans la tradition afro-descendante.</p>
+									<a href="/evenements/1" class="btn btn-small">Participer</a>
+								</article>
+								<article class="card carousel-card">
+									<img src="/images/cercles-parole.jpg" alt="Cercle de parole" class="card-image">
+									<h3 class="card-title">Cercle de parole</h3>
+									<p class="card-date">22 juillet 2025</p>
+									<p class="card-description">Un espace pour échanger librement entre femmes noires et racisées.</p>
+									<a href="/evenements/2" class="btn btn-small">Participer</a>
+								</article>
+								<article class="card carousel-card">
+									<img src="/images/autodefense.jpg" alt="Stage d’autodéfense" class="card-image">
+									<h3 class="card-title">Stage d’autodéfense</h3>
+									<p class="card-date">28 juillet 2025</p>
+									<p class="card-description">Apprends à te défendre physiquement et mentalement dans un cadre bienveillant.</p>
+									<a href="/evenements/3" class="btn btn-small">Participer</a>
+								</article>
+							</div>
+						</div>
+	</section>
+
+	<section class="section">
+		<h2 class="section-title">Dernières ressources</h2>
+		<p class="section-subtitle">Des contenus pour s’informer et s’épanouir</p>
+		<div class="carousel-container">
+			<div class="carousel-track">
+				{% for resource in resources %}
+					<article class="card carousel-card">
+						<img src="{{ resource.image }}" alt="{{ resource.title }}" class="card-image">
+						<h3 class="card-title">{{ resource.title }}</h3>
+						<p class="card-description">{{ resource.description }}</p>
+						<a href="{{ resource.link }}" class="btn btn-small">Consulter</a>
+					</article>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="carousel-container">
+					<div class="carousel-track">
+						<article class="card carousel-card">
+							<img src="/images/guide-sante.jpg" alt="Guide santé mentale" class="card-image">
+							<h3 class="card-title">Guide santé mentale</h3>
+							<p class="card-description">Comprendre les enjeux spécifiques à la santé mentale des femmes racisées.</p>
+							<a href="/ressources/1" class="btn btn-small">Consulter</a>
+						</article>
+						<article class="card carousel-card">
+							<img src="/images/podcast-femmes.jpg" alt="Podcast voix de femmes" class="card-image">
+							<h3 class="card-title">Podcast “Voix de femmes”</h3>
+							<p class="card-description">Écoute les témoignages puissants de femmes noires en lutte et en résilience.</p>
+							<a href="/ressources/2" class="btn btn-small">Consulter</a>
+						</article>
+						<article class="card carousel-card">
+							<img src="/images/livre-feminisme.jpg" alt="Livre : Féminismes noirs" class="card-image">
+							<h3 class="card-title">Livre : Féminismes noirs</h3>
+							<p class="card-description">Une introduction accessible aux mouvements féministes afro-descendants.</p>
+							<a href="/ressources/3" class="btn btn-small">Consulter</a>
+						</article>
+					</div>
+				</div>
+	</section>
+
+	<section class="section">
+		<h2 class="section-title">Derniers témoignages</h2>
+		<p class="section-subtitle">Elles témoignent de leur expérience avec MWASI</p>
+		<div class="carousel-container">
+			<div class="carousel-track">
+				{% for resource in resources %}
+					<article class="card carousel-card">
+						<img src="{{ resource.image }}" alt="{{ resource.title }}" class="card-image">
+						<h3 class="card-title">{{ resource.title }}</h3>
+						<p class="card-description">{{ resource.description }}</p>
+						<a href="{{ resource.link }}" class="btn btn-small">Consulter</a>
+					</article>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="carousel-container">
+			<div class="carousel-track">
+				<article class="testimonial-card carousel-card">
+					<p class="testimonial-quote">“Participer à un cercle de parole a changé ma vie. J’ai trouvé un espace où je me sens enfin écoutée et comprise.”</p>
+					<div class="testimonial-author">
+						<img src="/images/avatar-juliette.jpg" alt="Juliette" class="testimonial-avatar">
+						<div>
+							<strong>Juliette</strong><br>
+							Bénéficiaire
+						</div>
+					</div>
+				</article>
+				<article class="testimonial-card carousel-card">
+					<p class="testimonial-quote">“Les ressources proposées m’ont aidée à avancer dans mon parcours personnel. Merci MWASI.”</p>
+					<div class="testimonial-author">
+						<img src="/images/avatar-aicha.jpg" alt="Aïcha" class="testimonial-avatar">
+						<div>
+							<strong>Aïcha</strong><br>
+							Militante
+						</div>
+					</div>
+				</article>
+				<article class="testimonial-card carousel-card">
+					<p class="testimonial-quote">“C’est un vrai soulagement de savoir que des associations comme celle-ci existent. Je me sens moins seule.”</p>
+					<div class="testimonial-author">
+						<img src="/images/avatar-bernadette.jpg" alt="Bernadette" class="testimonial-avatar">
+						<div>
+							<strong>Bernadette</strong><br>
+							Maman solo
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}
