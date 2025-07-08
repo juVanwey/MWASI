@@ -1,0 +1,15 @@
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5c2d91;
+    color: white;
+    padding: 15px 30px;
+  }
+  
+  .dash-header a.logout-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  

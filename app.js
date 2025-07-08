@@ -60,6 +60,11 @@ app.use("/", homeRoute); // Toutes les routes de homeRoute commenceront à "/"
 const loginRoutes = require('./src/routes/loginRoutes');
 app.use('/', loginRoutes);
 
+/* ---------------------------- ROUTE VERS LE DASHBOARD ---------------------------- */
+const adminRoutes = require('./src/routes/adminRoutes');
+app.use('/', adminRoutes); // Ajout après les autres routes
+
+
 /* --------------------------- LANCEMENT DU SERVEUR --------------------------- */
 
 // Démarre le serveur sur le port défini
