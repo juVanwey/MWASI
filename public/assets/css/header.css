@@ -1,7 +1,7 @@
 /* === HEADER GLOBAL === */
 
 .header {
-  background-color: #FBF9F7;
+  background-color: #fbf9f7;
   border-bottom: 1.5px solid #ddd;
   position: sticky;
   top: 0;
@@ -125,4 +125,46 @@
     transition: background-color 0.3s, color 0.3s;
     margin-top: 0.5rem;
   }
+}
+
+/* === ADMIN  === */
+
+.dash-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dash-header-left a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #9a3e35;
+  transition: color 0.3s;
+
+  .dash-header-left a:hover {
+    text-decoration: underline;
+    color: #6f2e28;
+  }
+}
+
+/* === HEADER GLOBAL === */
+
+.admin-header {
+  background-color: #fbf9f7;
+  border-bottom: 1.5px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* === CONTAINER PRINCIPAL === */
+
+.admin-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }

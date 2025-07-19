@@ -1,0 +1,74 @@
+{% extends "layouts/adminBase.twig" %}
+
+{% block title %}Détail de l'utilisateur{% endblock %}
+
+{% block main %}
+<link rel="stylesheet" href="assets/css/userFile.css">
+
+<div class="user-detail-container">
+
+  <div class="user-header">
+    <div>
+      <a href="/users" class="btn btn-secondary">
+        ← Retour
+      </a>
+      <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+      <div class="user-meta">
+        <span>
+          {% if user.status == "VOLUNTEER" %}Bénévole{% elseif user.status == "MEMBER" %}Membre
+          {% elseif user.status == "PROFESSIONAL" %}Professionnel.le
+          {% elseif user.status == "VISITOR" %}Visiteur
+          {% elseif user.status == "ADMIN" %}Administrateur.rice
+          {% endif %}
+        </span>        
+        <span>Depuis le {{ user.createdAt|date("d/m/Y") }}</span>
+        {% if user.isNewsletterSubscriber %}
+          <span class="badge">Inscrit.e à la newsletter</span>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="user-actions">
+      <a href="/{{ user.id }}/edit" class="btn btn-edit">✏️ Modifier</a>
+      <form action="/{{ user.id }}/delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?');">
+        <button type="submit" class="btn btn-delete">🗑️ Supprimer</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Informations personnelles</h2>
+    <div class="card-grid">
+      <div>
+        <label>Prénom</label>
+        <p>{{ user.firstName }}</p>
+      </div>
+      <div>
+        <label>Nom</label>
+        <p>{{ user.lastName }}</p>
+      </div>
+      <div>
+        <label>E-mail</label>
+        <p>{{ user.email }}</p>
+      </div>
+      <div>
+        <label>Téléphone</label>
+        <p>{{ user.phone ?? "-" }}</p>
+      </div>
+    </div>
+  </div>
+
+  {# <div class="card">
+    <h2>Rôles et permissions</h2>
+    <div class="roles">
+      {% for role in user.roles %}
+        <span class="role-tag">✔ {{ role }}</span>
+      {% else %}
+        <p>Aucun rôle attribué</p>
+      {% endfor %}
+    </div>
+  </div> #}
+
+</div>
+{% endblock %}

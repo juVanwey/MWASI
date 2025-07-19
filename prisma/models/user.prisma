@@ -7,6 +7,8 @@ model User {
   lastName               String                                   // Nom
   email                  String   @unique                         // Email unique pour login
   password               String?                                  // Mot de passe (optionnel)
+  phone                  String?                                  // Numéro de téléphone (optionnel)
+  profilePicture         String?                                  // URL de la photo de profil (optionnel)
   status                 UserStatus?                              // Statut (admin, visiteur, bénévole, membre, pro)
   isNewsletterSubscriber Boolean  @default(false)                   // Abonné à la newsletter (false par défaut)
   createdAt              DateTime @default(now())                  // Date de création du compte
@@ -36,8 +38,9 @@ model User {
 
 enum UserStatus {
   ADMIN
-  VISITOR
-  VOLUNTEER
   MEMBER
   PROFESSIONAL
+  VISITOR
+  VOLUNTEER
 }
+

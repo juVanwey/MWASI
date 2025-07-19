@@ -1,0 +1,138 @@
+:root {
+    --bg-light: #f9fafb;
+    --white: #ffffff;
+    --gray-border: #e5e7eb;
+    --gray-text: #6b7280;
+    --black-text: #111827;
+    --primary: #7c2d12;
+    --primary-hover: #65200a;
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+    --badge-green: #22c55e;
+  }
+  
+  body {
+    background-color: var(--bg-light);
+    font-family: 'Inter', sans-serif;
+    color: var(--black-text);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .user-detail-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .user-header h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  .user-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--gray-text);
+  }
+  
+  .user-meta .badge {
+    background-color: var(--badge-green);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .user-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .btn-edit {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  .btn-edit:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .btn-delete {
+    background-color: var(--danger);
+    color: white;
+  }
+  
+  .btn-delete:hover {
+    background-color: var(--danger-hover);
+  }
+  
+  .card {
+    background-color: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  
+  .card-grid label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--gray-text);
+  }
+  
+  .card-grid p {
+    font-size: 16px;
+    margin: 4px 0 12px 0;
+    color: var(--black-text);
+  }
+  
+  .roles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .role-tag {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    width: fit-content;
+  }
+  

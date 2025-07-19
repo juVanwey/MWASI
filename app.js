@@ -13,6 +13,9 @@ const cors = require("cors");
 // Déclare le port d’écoute : depuis .env ou 3000 par défaut
 const PORT = process.env.PORT || 3000;
 
+// Importe le middleware pour gérer les sessions
+const session = require("express-session");
+
 /* -------------------------- MIDDLEWARES -------------------------- */
 
 // Active CORS pour toutes les routes (utile si front et back ne sont pas sur le même domaine)
@@ -30,6 +33,15 @@ app.use(express.urlencoded({ extended: true }));
 const path = require("path");
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: "hahaha", // secret pour signer le cookie de session
+  resave: true, // resave la session même si elle n'a pas été modifiée
+  saveUninitialized: true, // sauvegarder la session même si elle n'est pas initialisée
+  cookie: {
+    secure: false, // à mettre à true en production avec HTTPS
+    maxAge: 3600000 // 1h par exemple
+  }
+  }))
 
 /* ------------------------ MOTEUR DE VUE TWIG ------------------------ */
 
@@ -55,14 +67,19 @@ app.set("views", path.join(__dirname, "src/views"));
 const homeRoute = require("./src/routes/homeRoutes");
 app.use("/", homeRoute); // Toutes les routes de homeRoute commenceront à "/"
 
-/* ---------------------------- ROUTE DE CONNEXION ---------------------------- */
-// Import et utilisation de la route login
-const loginRoutes = require('./src/routes/loginRoutes');
-app.use('/', loginRoutes);
+/* ---------------------------- ROUTE DE CONNEXION ADMIN ---------------------------- */
+// Import et utilisation des routes de connexion, accès au dashboard, et déconnexion...
+const adminRoutes = require('./src/routes/adminRoutes');
+app.use('/', adminRoutes);
+
+/* ---------------------------- ROUTE POUR LES UTILISATEURS ---------------------------- */
+// Import et utilisation de la route pour afficher les utilisateurs
+const userRoutes = require('./src/routes/userRoutes');
+app.use('/', userRoutes); // Toutes les routes de userRoutes commenceront à "/"
 
 /* ---------------------------- ROUTE VERS LE DASHBOARD ---------------------------- */
-const adminRoutes = require('./src/routes/adminRoutes');
-app.use('/', adminRoutes); // Ajout après les autres routes
+// const adminRoutes = require('./src/routes/adminRoutes');
+// app.use('/', adminRoutes); // Ajout après les autres routes
 
 
 /* --------------------------- LANCEMENT DU SERVEUR --------------------------- */

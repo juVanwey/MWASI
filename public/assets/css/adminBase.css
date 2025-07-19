@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* === Reset et base === */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: sans-serif;
+  background-color: #fbf9f7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Structure de base */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Prend toute la hauteur visible */
+}
+
+.page-main {
+  flex: 1; /* Prend l'espace disponible entre header et footer */
+}

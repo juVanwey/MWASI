@@ -1,0 +1,58 @@
+{% extends "layouts/adminBase.twig" %}
+
+{% block style %}
+  <link rel="stylesheet" href="/assets/css/createUpdateUser.css"/>
+{% endblock %}
+
+{% block main %}
+<section class="user-form-container">
+  <h1>{{ user ? "Modifier l'utilisateur" : "Créer un utilisateur" }}</h1>
+
+  <form method="POST" action="{{ user ? '/' ~ user.id ~ '/edit' : '/create' }}">
+    <div class="form-group">
+      <label for="firstName">Prénom *</label>
+      <input type="text" name="firstName" id="firstName" value="{{ user.firstName | default('') }}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Nom *</label>
+      <input type="text" name="lastName" id="lastName" value="{{ user.lastName | default('') }}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" name="email" id="email" value="{{ user.email | default('') }}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe {% if not user %}*{% endif %}</label>
+      <input type="password" name="password" id="password" {% if not user %}required{% endif %}>
+      {% if user %}
+        <small>Laisse vide si tu ne souhaites pas modifier le mot de passe</small>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="status">Statut *</label>
+      <select name="status" id="status" required>
+        {% for value in ['ADMIN', 'MEMBER', 'PROFESSIONAL', 'VISITOR', 'VOLUNTEER'] %}
+          <option value="{{ value }}" {% if user and user.status == value %}selected{% endif %}>{{ value | capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" name="isNewsletterSubscriber" value="true"
+          {% if user and user.isNewsletterSubscriber %}checked{% endif %}>
+        Abonné à la newsletter
+      </label>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit">{{ user ? "Mettre à jour" : "Créer" }}</button>
+      <a href="/users" class="cancel-btn">Annuler</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,61 @@
+.user-form-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-form-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .form-group.checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .form-buttons button {
+    padding: 0.7rem 1.5rem;
+    background-color: #146c43;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .form-buttons .cancel-btn {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+  }
+  

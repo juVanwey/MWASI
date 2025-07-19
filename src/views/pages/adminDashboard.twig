@@ -1,0 +1,40 @@
+{% extends "layouts/adminBase.twig" %}
+
+{% block style %}
+	<link rel="stylesheet" href="/assets/css/adminDashboard.css"/>
+	<link rel="stylesheet" href="/assets/css/adminSidebar.css"/>
+{% endblock %}
+
+{% block title %}Dashboard — Admin - MWASI
+{% endblock %}
+
+{% block main %}
+
+	<main class="main-container page-main">
+		<div class="dash-layout">
+
+			{% include "partials/adminSidebar.twig" %}
+
+			<div class="dash-content">
+				<section>
+					<h2 class="dashboard-title">Quoi de neuf Julie ?</h2>
+					<div class="dashboard-cards">
+						<a href="/admin/users" class="card">
+							<h3>10</h3>
+							<p>événements organisés</p>
+						</a>
+						<a href="/admin/events" class="card">
+							<h3>100</h3>
+							<p>abonnées à la newsletter</p>
+						</a>
+						<a href="/admin/resources" class="card">
+							<h3>1000</h3>
+							<p>contenus partagés</p>
+						</a>
+					</div>
+				</section>
+			</div>
+
+		</div>
+	</main>
+{% endblock %}

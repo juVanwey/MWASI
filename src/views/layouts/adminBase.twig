@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/assets/css/adminBase.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css"/>
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
+    {% block style %}{% endblock %}
+    <title>{% block title %}MWASI{% endblock %}</title>
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      {% include "partials/adminHeader.twig" %}
+      
+      {# <main class="page-main"> #}
+        {% block main %}{% endblock %}
+      {# </main> #}
+
+      {% include "partials/adminFooter.twig" %}
+    </div>
+
+    {% block script %}{% endblock %}
+  </body>
+</html>

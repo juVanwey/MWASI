@@ -1,0 +1,220 @@
+{# 
+  Template d'affichage de la liste des utilisateurs.
+  Étend la base d'administration adminBase.twig.
+  Affiche une liste avec options de recherche, filtres par statut, et actions CRUD.
+#}
+
+{% extends 'layouts/adminBase.twig' %}
+
+{% block style %}
+  {# CSS spécifique à la page utilisateurs #}
+  <link rel="stylesheet" href="/assets/css/users.css"/>
+  <style>
+    /* Style simple pour les badges de statut */
+    .badge {
+      padding: 3px 8px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.85em;
+      display: inline-block;
+      text-transform: capitalize;
+    }
+    .badge-admin { background-color: #e74c3c; }       /* rouge */
+    .badge-volunteer { background-color: #3498db; }  /* bleu */
+    .badge-member { background-color: #2ecc71; }     /* vert */
+    /* Message quand aucun résultat trouvé */
+    .empty-message {
+      text-align: center;
+      font-style: italic;
+      color: #666;
+      padding: 15px 0;
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <main class="page-main">
+    <div class="container">
+
+      <a href="/dashboard" class="back-link">← Retour</a>
+
+      <div class="header">
+        <div>
+          <h1>Gestion des utilisateurs</h1>
+          <p class="subtitle">Gérez les participants, membres, bénévoles et donateurs</p>
+        </div>
+        <div class="header-actions">
+          {# Bouton CSV activé par JS avec les cases cochées #}
+          <button id="export-csv-btn" class="btn btn-secondary">Exporter CSV</button>
+          <a href="/create" class="btn btn-primary">+ Créer un utilisateur</a>
+        </div>
+      </div>
+
+      {# Formulaire de filtres - recherche texte + filtre statut #}
+      <form method="get" class="filters">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="user-search" name="search" placeholder="Rechercher un utilisateur…" class="search-input"/>
+        </div>
+
+        <select name="status" class="filter-select" onchange="this.form.submit()">
+          <option value="">Tous les statuts</option>
+          {% for status in statuses %}
+            <option 
+              value="{{ status|lower }}"
+              {% if selectedStatus and selectedStatus|lower == status|lower %}selected{% endif %}
+            >
+              {{ status|capitalize }}
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+
+      {# Tableau utilisateurs #}
+      <table class="user-table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="select-all"/></th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>E-mail</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody">
+          {% for user in users %}
+            <tr>
+              <td><input type="checkbox" class="user-checkbox" value="{{ user.id }}"/></td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="badge badge-{{ user.status|lower }}">{{ user.status }}</span>
+              </td>
+              <td>
+                <a href="/{{ user.id }}" title="Voir">👁️</a>
+                <a href="/{{ user.id }}/edit" title="Modifier">✏️</a>
+                <form action="/{{ user.id }}/delete" method="post" style="display:inline;">
+                  <button type="submit" title="Supprimer" class="delete-btn">🗑️</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="6" class="empty-message">Aucun utilisateur trouvé.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <a href="#" class="page-link">← Précédent</a>
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link">Suivant →</a>
+      </div>
+    </div>
+  </main>
+
+  {# 📜 Script JS #}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectAllCheckbox = document.getElementById('select-all');
+      const searchInput = document.getElementById('user-search');
+      const tbody = document.getElementById('users-tbody');
+      let userRows = Array.from(tbody.querySelectorAll('tr'));
+
+      // Fonction pour mettre à jour la liste des lignes (après ajout/suppression DOM)
+      function refreshUserRows() {
+        userRows = Array.from(tbody.querySelectorAll('tr:not(.no-results-row)'));
+      }
+
+      // ✅ Case principale coche/décoche toutes les cases visibles
+      selectAllCheckbox.addEventListener('change', () => {
+        userRows.forEach(row => {
+          if (row.style.display !== 'none') {
+            const cb = row.querySelector('.user-checkbox');
+            if(cb) cb.checked = selectAllCheckbox.checked;
+          }
+        });
+      });
+
+      // 🔍 Recherche dynamique sur prénom, nom, email
+      searchInput.addEventListener('input', () => {
+        const searchValue = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        userRows.forEach(row => {
+          // Sauter la ligne de message « Aucun résultat » si présente
+          if(row.classList.contains('no-results-row')) return;
+
+          const firstName = row.cells[1].textContent.toLowerCase();
+          const lastName = row.cells[2].textContent.toLowerCase();
+          const email = row.cells[3].textContent.toLowerCase();
+
+          const match = firstName.includes(searchValue) || lastName.includes(searchValue) || email.includes(searchValue);
+          if(match) {
+            row.style.display = '';
+            visibleCount++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        // Gérer le message "Aucun résultat"
+        const emptyRow = tbody.querySelector('.no-results-row');
+        if(visibleCount === 0) {
+          if(!emptyRow) {
+            const tr = document.createElement('tr');
+            tr.classList.add('no-results-row');
+            tr.innerHTML = `<td colspan="6" class="empty-message">Aucun résultat trouvé.</td>`;
+            tbody.appendChild(tr);
+          }
+        } else {
+          if(emptyRow) emptyRow.remove();
+        }
+      });
+
+      // 📥 Export CSV avec les utilisateurs cochés et visibles
+      const exportBtn = document.getElementById('export-csv-btn');
+      exportBtn.addEventListener('click', () => {
+        const rows = [["ID", "Prénom", "Nom", "Email", "Statut"]];
+        let hasSelected = false;
+
+        userRows.forEach(row => {
+          if(row.style.display === 'none') return; // ignoré si caché
+
+          const checkbox = row.querySelector('.user-checkbox');
+          if(checkbox && checkbox.checked) {
+            hasSelected = true;
+            rows.push([
+              checkbox.value,
+              row.cells[1].textContent.trim(),
+              row.cells[2].textContent.trim(),
+              row.cells[3].textContent.trim(),
+              row.cells[4].textContent.trim(),
+            ]);
+          }
+        });
+
+        if(!hasSelected) {
+          alert("Veuillez sélectionner au moins un utilisateur à exporter.");
+          return;
+        }
+
+        // Génération CSV
+        const csvContent = rows.map(e => e.map(field => `"${field.replace(/"/g, '""')}"`).join(",")).join("\n");
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.setAttribute("href", URL.createObjectURL(blob));
+        link.setAttribute("download", "utilisateurs.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    });
+  </script>
+{% endblock %}
